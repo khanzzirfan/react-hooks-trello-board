@@ -1,0 +1,45 @@
+{
+  "name": "react-hooks-trello-board",
+  "private": false,
+  "homepage": "https://create-react-app-redux.now.sh",
+  "scripts": {
+    "deploy": "now && now alias",
+    "start": "react-scripts start",
+    "now-start": "serve -s ./build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "precommit": "pretty-quick --staged"
+  },
+  "devDependencies": {
+    "classnames": "^2.2.6",
+    "cross-env": "^7.0.0",
+    "nib": "^1.1.2",
+    "prettier": "1.19.1",
+    "react-scripts": "2.1.8"
+  },
+  "dependencies": {
+    "connected-react-router": "^6.6.1",
+    "fake": "^0.2.2",
+    "faker": "^4.1.0",
+    "lodash": "^4.17.15",
+    "react": "16.12.0",
+    "react-dnd": "^10.0.2",
+    "react-dnd-html5-backend": "^10.0.2",
+    "react-dom": "16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "4.4.0-beta.8",
+    "react-router-redux": "^4.0.8",
+    "redux": "4.0.5",
+    "redux-thunk": "2.3.0",
+    "sanitize.css": "7.0.3",
+    "serve": "10.1.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
