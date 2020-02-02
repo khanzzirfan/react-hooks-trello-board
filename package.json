@@ -1,19 +1,20 @@
 {
   "name": "react-hooks-trello-board",
   "private": false,
-  "homepage": "https://create-react-app-redux.now.sh",
+  "homepage": "https://khanzzirfan.github.io/react-hooks-trello-board/",
   "scripts": {
-    "deploy": "now && now alias",
     "start": "react-scripts start",
-    "now-start": "serve -s ./build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "precommit": "pretty-quick --staged"
+    "precommit": "pretty-quick --staged",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "classnames": "^2.2.6",
     "cross-env": "^7.0.0",
+    "gh-pages": "^2.2.0",
     "nib": "^1.1.2",
     "prettier": "1.19.1",
     "react-scripts": "2.1.8"
