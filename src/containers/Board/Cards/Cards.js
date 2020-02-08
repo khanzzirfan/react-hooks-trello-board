@@ -25,10 +25,14 @@ const specs = {
   drop(props, monitor, component) {
     document.getElementById(monitor.getItem().id).style.display = 'block'
     const { placeholderIndex } = component.state
+    console.log('*********** Cards Specs****************')
+    console.log(props)
+
     const lastX = monitor.getItem().x
     const lastY = monitor.getItem().y
     const nextX = props.x
     let nextY = placeholderIndex
+    console.log('last position', lastX, lastY, nextX, nextY)
 
     if (lastY > nextY) {
       // move top
@@ -42,10 +46,11 @@ const specs = {
       // if position equel
       return
     }
-
+    console.log('drop card position', lastX, lastY, nextX, nextY)
     props.moveCard(lastX, lastY, nextX, nextY)
   },
   hover(props, monitor, component) {
+    console.log('running hover')
     // defines where placeholder is rendered
     const placeholderIndex = getPlaceholderIndex(
       monitor.getClientOffset().y,
@@ -89,7 +94,7 @@ class Cards extends Component {
     cards: PropTypes.array.isRequired,
     x: PropTypes.number.isRequired,
     isOver: PropTypes.bool,
-    item: PropTypes.object,
+    // item: PropTypes.object,
     canDrop: PropTypes.bool,
     startScrolling: PropTypes.func,
     stopScrolling: PropTypes.func,
@@ -107,6 +112,7 @@ class Cards extends Component {
   render() {
     const { connectDropTarget, x, cards, isOver, canDrop } = this.props
     const { placeholderIndex } = this.state
+    console.log('render', x)
 
     let isPlaceHold = false
     let cardList = []
@@ -158,6 +164,46 @@ function collectDragTargetSource(connectDragSource, monitor) {
   }
 }
 
+// import { useDrop } from 'react-dnd'
+// const [{ isOver, canDrop, item }, drop] = useDrop({
+//   drop(props, monitor) {
+//     document.getElementById(monitor.getItem().id).style.display = 'block'
+//     const { placeholderIndex } = component.state
+//     const lastX = monitor.getItem().x
+//     const lastY = monitor.getItem().y
+//     const nextX = props.x
+//     let nextY = placeholderIndex
+
+//     if (lastY > nextY) {
+//       // move top
+//       nextY += 1
+//     } else if (lastX !== nextX) {
+//       // insert into another list
+//       nextY += 1
+//     }
+
+//     if (lastX === nextX && lastY === nextY) {
+//       // if position equel
+//       return
+//     }
+
+//     props.moveCard(lastX, lastY, nextX, nextY)
+
+//     //
+//     onDrop(item.type)
+//     return undefined
+//   },
+//   hover(props, monitor) {
+//     if (draggedId !== id) {
+//       moveCard(draggedId, id)
+//     }
+//   },
+//   collect: monitor => ({
+//     isOver: monitor.isOver(),
+//     canDrop: monitor.canDrop(),
+//     item: monitor.getItem()
+//   })
+// })
 // @DropTarget('card', specs, (connectDragSource, monitor) => ({
 //   connectDropTarget: connectDragSource.dropTarget(),
 //   isOver: monitor.isOver(),

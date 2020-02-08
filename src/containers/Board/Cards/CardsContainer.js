@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import { DropTarget, DragSource } from 'react-dnd'
-
+import CardsViaHooks from './CardsViaHooks'
 import Cards from './Cards'
 
 const listSource = {
@@ -13,6 +12,7 @@ const listSource = {
     }
   },
   endDrag(props) {
+    console.log('ending drag')
     props.stopScrolling()
   }
 }
@@ -39,6 +39,7 @@ const listTarget = {
     const { id: listId } = monitor.getItem()
     const { id: nextX } = props
     if (listId !== nextX) {
+      console.log('moving nextX props.moveList')
       props.moveList(listId, props.x)
     }
   }
@@ -67,6 +68,7 @@ class CardsContainer extends Component {
       moveCard,
       isDragging
     } = this.props
+
     const opacity = isDragging ? 0.5 : 1
 
     return connectDragSource(
@@ -75,7 +77,7 @@ class CardsContainer extends Component {
           <div className="desk-head">
             <div className="desk-name">{item.name}</div>
           </div>
-          <Cards
+          <CardsViaHooks
             moveCard={moveCard}
             x={x}
             cards={item.cards}
