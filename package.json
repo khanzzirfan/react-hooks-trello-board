@@ -1,7 +1,7 @@
 {
   "name": "react-hooks-trello-board",
   "private": false,
-  "homepage": "https://khanzzirfan.github.io/react-hooks-trello-board",
+  "homepage": "https://khanzzirfan.github.io/react-hooks-trello-board/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
