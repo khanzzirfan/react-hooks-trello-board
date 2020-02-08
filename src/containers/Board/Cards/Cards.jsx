@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import { useDrop } from 'react-dnd'
 
-import Card from './DraggableCard'
+import Card from './DraggableCardViaHooks'
 import { CARD_HEIGHT, CARD_MARGIN, OFFSET_HEIGHT } from '../../../constants.js'
 
 const getPlaceholderIndex = (y, scrollY) => {
