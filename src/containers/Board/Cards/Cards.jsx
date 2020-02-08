@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import { useDrop } from 'react-dnd'
 
@@ -18,7 +19,7 @@ const getPlaceholderIndex = (y, scrollY) => {
   return placeholderIndex
 }
 
-const CardViaHooks = ({
+const Cards = ({
   moveCard,
   x,
   cards,
@@ -137,4 +138,17 @@ const CardViaHooks = ({
   )
 }
 
-export default CardViaHooks
+Card.propTypes = {
+  connectDropTarget: PropTypes.func.isRequired,
+  moveCard: PropTypes.func.isRequired,
+  cards: PropTypes.array.isRequired,
+  x: PropTypes.number.isRequired,
+  isOver: PropTypes.bool,
+  // item: PropTypes.object,
+  canDrop: PropTypes.bool,
+  startScrolling: PropTypes.func,
+  stopScrolling: PropTypes.func,
+  isScrolling: PropTypes.bool
+}
+
+export default Cards
