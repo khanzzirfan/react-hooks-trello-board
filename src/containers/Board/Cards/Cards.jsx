@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import { useDrop } from 'react-dnd'
 
-import Card from './DraggableCardViaHooks'
+import Card from './DraggableCard'
 import { CARD_HEIGHT, CARD_MARGIN, OFFSET_HEIGHT } from '../../../constants.js'
 
 const getPlaceholderIndex = (y, scrollY) => {
@@ -32,7 +32,7 @@ const Cards = ({
   const [{ placeholderIndex }, setPosition] = useState({ placeholderIndex: -1 })
   const refEl = useRef(null)
 
-  const [{ isOver, canDrop, item }, connectDrag] = useDrop({
+  const [{ isOver, canDrop }, connectDrag] = useDrop({
     accept: 'card',
     drop(props, monitor) {
       document.getElementById(monitor.getItem().id).style.display = 'block'

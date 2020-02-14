@@ -38,7 +38,7 @@ const CardsContainer = ({
     canDrop() {
       return false
     },
-    hover(monitor) {
+    hover(props, monitor) {
       if (!isScrolling) {
         if (window.innerWidth - monitor.getClientOffset().x < 200) {
           startScrolling('toRight')
