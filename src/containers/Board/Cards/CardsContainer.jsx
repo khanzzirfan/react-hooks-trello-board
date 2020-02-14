@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import Cards from './Cards'
 import { CardTypes } from './cardTypes'
@@ -18,13 +17,13 @@ const CardsContainer = ({
   const ref = useRef(null)
   const [{ isDragging }, connectDrag] = useDrag({
     item: { id, type: CardTypes.CARD },
-    begin(monitor) {
+    begin() {
       return {
         id,
         x
       }
     },
-    end(props) {
+    end() {
       stopScrolling()
     },
     collect: monitor => {
@@ -39,7 +38,7 @@ const CardsContainer = ({
     canDrop() {
       return false
     },
-    hover(props, monitor) {
+    hover(monitor) {
       if (!isScrolling) {
         if (window.innerWidth - monitor.getClientOffset().x < 200) {
           startScrolling('toRight')

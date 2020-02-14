@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useDrag, DragPreviewImage } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
@@ -9,10 +9,10 @@ const imgSrc = getEmptyImage()
 const CardComponent = ({ item, x, y, stopScrolling }) => {
   const ref = useRef(null)
 
-  const [{ display, opacity }, connectDrag, preview] = useDrag({
+  const [{ display }, connectDrag, preview] = useDrag({
     item: { id: item.id, type: 'card' },
 
-    begin(monitor) {
+    begin() {
       // dispatch to redux store that drag is started
       const { id, title } = item
       const { clientWidth, clientHeight } = ref.current
@@ -25,8 +25,6 @@ const CardComponent = ({ item, x, y, stopScrolling }) => {
     },
     options: {
       arePropsEqual: function arePropsEqual(props, otherProps) {
-        console.log(props)
-        console.log(otherProps)
         let isEqual = true
         if (
           props.item.id === otherProps.item.id &&
