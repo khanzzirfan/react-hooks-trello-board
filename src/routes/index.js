@@ -5,7 +5,7 @@ import { Base } from '../containers/Base'
 const routes = (
   <div>
     <Switch>
-      <Route exact path="/" component={Base} />
+      <Route exact path="/react-hooks-trello-board" component={Base} />
     </Switch>
   </div>
 )

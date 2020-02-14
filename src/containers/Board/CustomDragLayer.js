@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
-import { DragLayer } from 'react-dnd'
+import { useDragLayer } from 'react-dnd'
 
 import CardDragPreview from './CardDragPreview'
 import snapToGrid from './snapToGrid'
@@ -12,81 +11,59 @@ const layerStyles = {
   zIndex: 100000
 }
 
-function getItemStyles(props) {
-  const { initialOffset, currentOffset } = props
+const getItemStyles = (initialOffset, currentOffset, isSnapToGrid) => {
   if (!initialOffset || !currentOffset) {
     return {
       display: 'none'
     }
   }
-
   let { x, y } = currentOffset
-
-  if (props.snapToGrid) {
+  if (isSnapToGrid) {
     x -= initialOffset.x
     y -= initialOffset.y
     ;[x, y] = snapToGrid(x, y)
     x += initialOffset.x
     y += initialOffset.y
   }
-
   const transform = `translate(${x}px, ${y}px)`
   return {
-    WebkitTransform: transform,
-    transform
+    transform,
+    WebkitTransform: transform
   }
 }
 
-class CustomDragLayer extends Component {
-  static propTypes = {
-    item: PropTypes.object,
-    itemType: PropTypes.string,
-    initialOffset: PropTypes.shape({
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
-    }),
-    currentOffset: PropTypes.shape({
-      x: PropTypes.number.isRequired,
-      y: PropTypes.number.isRequired
-    }),
-    isDragging: PropTypes.bool.isRequired,
-    snapToGrid: PropTypes.bool.isRequired
-  }
-
-  renderItem(type, item) {
-    switch (type) {
+const CustomDragLayer = props => {
+  const {
+    itemType,
+    isDragging,
+    item,
+    initialOffset,
+    currentOffset
+  } = useDragLayer(monitor => ({
+    item: monitor.getItem(),
+    itemType: monitor.getItemType(),
+    initialOffset: monitor.getInitialSourceClientOffset(),
+    currentOffset: monitor.getSourceClientOffset(),
+    isDragging: monitor.isDragging()
+  }))
+  function renderItem() {
+    switch (itemType) {
       case 'card':
         return <CardDragPreview card={item} />
       default:
         return null
     }
   }
-
-  render() {
-    const { item, itemType, isDragging } = this.props
-
-    if (!isDragging) {
-      return null
-    }
-
-    return (
-      <div style={layerStyles}>
-        <div style={getItemStyles(this.props)}>
-          {this.renderItem(itemType, item)}
-        </div>
+  if (!isDragging) {
+    return null
+  }
+  return (
+    <div style={layerStyles}>
+      <div
+        style={getItemStyles(initialOffset, currentOffset, props.snapToGrid)}>
+        {renderItem()}
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-function collect(monitor) {
-  return {
-    item: monitor.getItem(),
-    itemType: monitor.getItemType(),
-    initialOffset: monitor.getInitialSourceClientOffset(),
-    currentOffset: monitor.getSourceClientOffset(),
-    isDragging: monitor.isDragging()
-  }
-}
-
-export default DragLayer(collect)(CustomDragLayer)
+export default CustomDragLayer
