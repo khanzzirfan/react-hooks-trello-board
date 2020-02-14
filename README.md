@@ -1,9 +1,9 @@
 # react-hooks-trello-board
 
+The app is orginally from react dnd github which is archived now. I took a chance to refactored this app using Hooks as part of my learning excercise.
+
 Trello lets you work more collaboratively and get more done.
 Trello’s boards, lists, and cards enable you to organize and prioritize your projects in a fun, flexible, and rewarding way.
-
-The app is orginally from react dnd github which is archived now. I took a chance to refactored this app using Hooks as part of my learning excercise.
 
 ![Image description](./assets/trelloboard.PNG)
 
